@@ -19,7 +19,7 @@ const annotationKeys = ['bold', 'italic', 'strikethrough', 'underline', 'code']
 
 const BlogPost = (post: StructuredPost) => {
     return (
-    <div className="flex flex-col mx-10 my-3 {border-b-2} p-2">
+    <div className="flex flex-col mx-10 my-3 border-b-2 p-2">
         <div className="flex flex-row justify-between my-1">
             <div className="font-bold text-2xl">
                 {post.title}
