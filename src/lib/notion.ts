@@ -4,7 +4,8 @@ import { Client } from '@notionhq/client';
 type Post = {
   title: {id: string; type: string; title: { text: {content: string} }[] };
   entry: {id: string; type: string; rich_text: { text: {content: string} }[] };
-  createTime: {id: string; type: string; created_time: string};
+  systemCreateTime: {id: string; type: string; created_time: string};
+  createTime: {id: string; type: string; date: {start: string; end: string | undefined; time_zone: string | undefined}}
 };
 
 const notionAPIKey = process.env.NOTION_API_KEY
@@ -18,16 +19,17 @@ export async function getBlogPosts() {
 
     const res = await notion.databases.query({
         database_id: notionDatabaseId
-    })
-    console.log(res)
+    });
+    // @ts-ignore
+    console.log(res.results.forEach((res) => console.log(res.properties)))
 
     // @ts-ignore
     const posts = res.results.map((res) => res.properties) as Row[]
 
-    const structuredPosts = posts.map((post) => ({
+    const structuredPosts = posts.map((post: Post) => ({
       title: post.title.title[0].text.content,
-      entry: post.entry.rich_text[0].text.content,
-      createTime: post.createTime.created_time,
+      createTime: post.createTime ? post.createTime.date.start : post.systemCreateTime.created_time,
+      richText: post.entry.rich_text,
     }))
 
     return structuredPosts

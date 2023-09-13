@@ -16,6 +16,10 @@ const config: Config = {
     },
     fontFamily: {
       'sans': 'Roboto',
+    },
+    colors: {
+      'primary': '#5f5f5f',
+      'text': '#dddddd',
     }
   },
   plugins: [],

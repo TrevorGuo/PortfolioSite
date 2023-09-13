@@ -9,19 +9,24 @@ type BlogProps = {
 };
 
 const Blog: NextPage<BlogProps> = ({ posts }) => {
-  console.log(posts)
+  console.log("Initializing blog")
   return (
-    <main className="my-5">
-      <div className="text-center text-5xl font-bold font-sans">
-        Dev Journal
+    <main className="dark:bg-primary dark: text-text h-full">
+      <div className="p-5 text-center font-bold font-sans">
+        <div className="text-5xl">
+          Dev Journal
+        </div>
+        <div className="text-3xl">
+          Trevor Guo
+      </div>
       </div>
       {posts.map((post) => {
         return (
           <BlogPost
             key={post.createTime}
             title={post.title}
-            entry={post.entry}
             createTime={post.createTime}
+            richText={post.richText}
           />
         )
       })}
@@ -32,7 +37,7 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
 export async function getServerSideProps() {
   console.log("Fetching server side props");
   const posts = await getBlogPosts();
-  console.log(posts)
+  console.log("Posts")
 
   return {
     props: {
