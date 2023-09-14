@@ -19,16 +19,19 @@ const annotationKeys = ["bold", "italic", "strikethrough", "underline", "code"]
 
 const BlogPost = (post: StructuredPost) => {
     return (
-    <div className={"flex flex-col mx-10 my-3 pb-5" + (post.createTime === "2023-09-10" ? "" : " border-b-2")}>
-        <div className="flex flex-row justify-between my-1">
-            <div className="font-bold text-2xl">
+    <div className={
+        "flex flex-col border-text dark:border-dark-text \
+         py-3 lg:py-5"
+         + (post.createTime === "2023-09-10" ? "" : " border-b-2")}>
+        <div className="flex flex-row flex-wrap justify-between items-baseline">
+            <div className="text-lg lg:text-2xl">
                 {post.title}
             </div>
-            <div>
+            <div className="text-xs lg:text-base">
                 {iso2Common(post.createTime)}
             </div>
         </div>
-        <pre className="whitespace-pre-wrap font-sans text-xl">
+        <pre className="whitespace-pre-wrap font-light">
             {post.richText.map((richText) => {
                 return richText2HTML(richText)
                 })
