@@ -3,7 +3,13 @@
 @tailwind utilities;
 
 html {
-  @apply bg-primary
+  @apply bg-primary dark:bg-dark-primary
+}
+
+code {
+  @apply text-lg font-mono px-1 py-0.5 shadow-sm rounded-md 
+    bg-yellow-50 text-orange-400
+    dark:bg-gray-500 dark:text-green-400
 }
 
 /* :root {

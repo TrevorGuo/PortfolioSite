@@ -15,11 +15,11 @@ type NotionRichText = {
     annotations: {bold: boolean, italic: boolean, strikethrough: boolean, underline: boolean, code: boolean, color: string},
 }
 
-const annotationKeys = ['bold', 'italic', 'strikethrough', 'underline', 'code']
+const annotationKeys = ["bold", "italic", "strikethrough", "underline", "code"]
 
 const BlogPost = (post: StructuredPost) => {
     return (
-    <div className="flex flex-col mx-10 my-3 border-b-2 p-2">
+    <div className={"flex flex-col mx-10 my-3 pb-5" + (post.createTime === "2023-09-10" ? "" : " border-b-2")}>
         <div className="flex flex-row justify-between my-1">
             <div className="font-bold text-2xl">
                 {post.title}
@@ -46,7 +46,6 @@ const iso2Common = (isoString : string): string => {
 }
 
 const richText2HTML = (richText: NotionRichText) => {
-    console.log(richText)
     const marks = annotationKeys.filter((annotation) => 
         // @ts-ignore
         richText.annotations[annotation]
@@ -54,7 +53,7 @@ const richText2HTML = (richText: NotionRichText) => {
             return {type: annotation}
         })
 
-    const nodeType = richText.href ? INLINES.HYPERLINK : 'text'
+    const nodeType = richText.href ? INLINES.HYPERLINK : "text"
 
     const data = richText.href ? {
         target: {
@@ -87,12 +86,12 @@ const overrides = {
 
         return (
         <a href={node.target.value.link.url}
-            className={'text-blue-500 underline ' + annotations}
-            target='_blank'
+            className={"text-blue-500 underline " + annotations}
+            target="_blank"
         >
             {node.target.value.content}
         </a>
-    )}
+    )},
 }
 
 const months = new Map<string, string>([

@@ -11,7 +11,7 @@ type BlogProps = {
 const Blog: NextPage<BlogProps> = ({ posts }) => {
   console.log("Initializing blog")
   return (
-    <main className="dark:bg-primary dark: text-text h-full">
+    <main className="bg-primary text-text dark:bg-dark-primary dark:text-dark-text h-full">
       <div className="p-5 text-center font-bold font-sans">
         <div className="text-5xl">
           Dev Journal

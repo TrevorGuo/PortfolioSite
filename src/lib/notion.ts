@@ -28,7 +28,7 @@ export async function getBlogPosts() {
 
     const structuredPosts = posts.map((post: Post) => ({
       title: post.title.title[0].text.content,
-      createTime: post.createTime ? post.createTime.date.start : post.systemCreateTime.created_time,
+      createTime: post.createTime.date ? post.createTime.date.start : post.systemCreateTime.created_time,
       richText: post.entry.rich_text,
     }))
 
