@@ -1,12 +1,13 @@
 import RichText from '@madebyconnor/rich-text-to-jsx';
-import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { BLOCKS, INLINES } from "@contentful/rich-text-types"
 
-export type StructuredPost = {
+export type StructuredProjectPost = {
     title: string,
-    createTime: string,
-    richText: NotionRichText[],
+    description: NotionRichText[],
+    pictures: Image[],
 }
 
+//refactor to notion.ts
 type NotionRichText = {
     type: string,
     text: {content: string, link: string | undefined},
@@ -15,37 +16,45 @@ type NotionRichText = {
     annotations: {bold: boolean, italic: boolean, strikethrough: boolean, underline: boolean, code: boolean, color: string},
 }
 
-const BlogPost = (post: StructuredPost) => {
-    return (
-    <div className={
-        "flex flex-col border-text dark:border-dark-text \
-         py-3 lg:py-5"
-         + (post.createTime === "2023-09-10" ? "" : " border-b-2")}>
-        <div className="flex flex-row flex-wrap justify-between items-baseline">
-            <div className="text-lg lg:text-2xl">
-                {post.title}
-            </div>
-            <div className="text-xs lg:text-base">
-                {iso2Common(post.createTime)}
-            </div>
-        </div>
-        <pre className="whitespace-pre-wrap font-light">
-            {post.richText.map((richText) => {
-                return richText2HTML(richText)
-            })
-            }</pre>
-    </div>
-    )
-    }
-
-const iso2Common = (isoString : string): string => {
-    const year = isoString.substring(0, 4)
-    const month = months.get(isoString.substring(5, 7))
-    const day = isoString.substring(8, 10)
-
-    return `${month} ${day}, ${year}`
+type Image = {
+    name: string,
+    type: string,
+    file: {url: string, expiry_time: string},
 }
 
+const ProjectPost = (post: StructuredProjectPost) => {
+    return (
+        <div className="flex flex-row p-5 m-5">
+            <div className="w-1/4 mx-5">
+                <div className="text-3xl mb-3">
+                    {post.title}
+                </div>
+                {
+                    post.pictures.length > 0 ?
+                        <div className="w-1/2">
+                            <img src={post.pictures[0].file.url}></img>
+                        </div> :
+                        null
+                }
+            </div>
+            <pre className="w-2/3 ml-5 whitespace-pre-wrap font-light">
+                {post.description.map((richText) => {
+                    return richText2HTML(richText)
+                })}
+            </pre>
+            <div>
+                {post.pictures.slice(1).map((picture) => {
+                    return (
+                        <img src={picture.file.url}></img>
+                    )
+                    })
+                }
+            </div>
+        </div>
+    )
+}
+
+// TODO: Refactor this later
 const annotationKeys = ["bold", "italic", "strikethrough", "underline", "code"]
 
 const richText2HTML = (richText: NotionRichText) => {
@@ -97,19 +106,4 @@ const overrides = {
     )},
 }
 
-const months = new Map<string, string>([
-    ["01", "January"],
-    ["02", "February"],
-    ["03", "March"],
-    ["04", "April"],
-    ["05", "May"],
-    ["06", "June"],
-    ["07", "July"],
-    ["08", "August"],
-    ["09", "September"],
-    ["10", "October"],
-    ["11", "November"],
-    ["12", "December"],
-]);
-
-export default BlogPost;
+export default ProjectPost;

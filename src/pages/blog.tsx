@@ -4,6 +4,8 @@ import { getBlogPosts } from '../lib/notion'
 import BlogPost, { StructuredPost } from '@/components/blogpost';
 import '../app/globals.css'
 import { Roboto } from 'next/font/google'
+import Link from 'next/link';
+import { HomeIcon } from '@heroicons/react/20/solid';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -20,9 +22,14 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
   return (
     <main className={roboto.className + 
       " bg-primary text-text dark:bg-dark-primary dark:text-dark-text h-full \
-        lg:text-lg\
-        mx-8 md:mx-32 lg:mx-96"}> 
-      <div className="pt-10">
+        lg:text-lg \
+        mx-8 md:mx-32 lg:mx-48 xl:mx-64"}> 
+      <div className="h-1/10 my-5 w-[2%]">
+        <Link href="/">
+          <HomeIcon />
+        </Link>
+      </div>
+      <div>
         <div className="text-2xl lg:text-4xl">
           Dev Journal
         </div>
@@ -47,7 +54,6 @@ const Blog: NextPage<BlogProps> = ({ posts }) => {
 export async function getServerSideProps() {
   console.log("Fetching server side props");
   const posts = await getBlogPosts();
-  console.log("Posts")
 
   return {
     props: {
