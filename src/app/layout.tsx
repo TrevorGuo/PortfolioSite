@@ -17,6 +17,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  console.log("Starting webpage")
   return (
     <html lang="en" >
       <body className={roboto.className}>{children}</body>

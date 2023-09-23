@@ -18,6 +18,7 @@ type ProjectProps = {
 };
 
 const Index: NextPage<ProjectProps> = ({posts}) => {
+  console.log("Displaying landing page")
   return(
     <main className="
       bg-secondary text-text dark:bg-dark-secondary dark:text-dark-text 
