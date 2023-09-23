@@ -15,12 +15,18 @@ const config: Config = {
       },
       colors: {
         'primary': '#f5f5f5',
+        'secondary': '#f5f5dc',
         'text': '#222222',
         'dark-primary': '#1f1f1f',
+        'dark-secondary': '#052419',
         'dark-text': '#bcbcbc',
       },
       fontSize: {
         'xs': '0.75rem',
+      },
+      height: {
+        '4/5': '80%',
+        '1/10': '10%',
       }
     },
   },
