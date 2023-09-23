@@ -20,12 +20,13 @@ const Projects = ({ posts }: {posts: StructuredProjectPost[]}) => {
                 <div className="text-center text-5xl p-7 font-light">
                     Experience
                 </div>
-                {posts.map((post => {
+                {posts.map(((post, idx) => {
                     return (
                         <ProjectPost
                             title={post.title}
                             description={post.description}
                             pictures={post.pictures}
+                            key={idx}
                         />
                     );
                 }))}

@@ -43,9 +43,9 @@ const ProjectPost = (post: StructuredProjectPost) => {
                 })}
             </pre>
             <div>
-                {post.pictures.slice(1).map((picture) => {
+                {post.pictures.slice(1).map((picture, idx) => {
                     return (
-                        <img src={picture.file.url}></img>
+                        <img src={picture.file.url} key={idx}></img>
                     )
                     })
                 }
