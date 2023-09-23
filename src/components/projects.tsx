@@ -18,7 +18,7 @@ const Projects = ({ posts }: {posts: StructuredProjectPost[]}) => {
                 " lg:text-lg \
                 mx-8 md:mx-32 lg:mx-48 xl:mx-64"}>
                 <div className="text-center text-5xl p-7 font-light">
-                    Experiences
+                    Experience
                 </div>
                 {posts.map((post => {
                     return (
